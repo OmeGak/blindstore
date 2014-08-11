@@ -39,5 +39,29 @@ class SecretKey(object):
 
 
 class Ciphertext(object):
-    def __init__(self, string):
-        self._raw = engine.Ciphertext(string)
+    def __init__(self, serialized_ciphertext):
+        self._raw = engine.Ciphertext(serialized_ciphertext)
+
+    def __getitem__(self, i):
+        return self._raw[i]
+
+    def __setitem__(self, i, value):
+        self._raw[i] = value
+
+    def __next__(self):
+        self._raw.__next__()
+    next = __next__
+
+    def __iter__(self):
+        self._raw.__iter__()
+
+    def __len__(self):
+        self._raw.__len__()
+
+    def __xor__(self, other):
+        self._raw.__xor__(other)
+    __add__ = __xor__
+
+    def __and__(self, other):
+        self._raw.__and__(other)
+    __mul__ = __and__
